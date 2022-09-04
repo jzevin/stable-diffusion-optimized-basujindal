@@ -243,7 +243,7 @@ def generate(
 
     time_taken = (toc - tic) / 60.0
     grid = torch.cat(all_samples, 0)
-    grid = make_grid(grid, nrow=n_iter)
+    grid = make_grid(grid, nrow=n_iter, padding=0)
     grid = 255.0 * rearrange(grid, "c h w -> h w c").cpu().numpy()
 
     txt = (
