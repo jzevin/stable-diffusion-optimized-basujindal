@@ -138,7 +138,7 @@ def generate(
     tic = time.time()
     os.makedirs(outdir, exist_ok=True)
     outpath = outdir
-    sample_path = os.path.join(outpath, "_".join(re.split(":| ", prompt)))[:150]
+    sample_path = os.path.join(outpath, "_".join(re.split(":| ", prompt)))[:750]
     os.makedirs(sample_path, exist_ok=True)
     base_count = len(os.listdir(sample_path))
 
@@ -222,7 +222,7 @@ def generate(
                         all_samples.append(x_sample.to("cpu"))
                         x_sample = 255.0 * rearrange(x_sample[0].cpu().numpy(), "c h w -> h w c")
                         Image.fromarray(x_sample.astype(np.uint8)).save(
-                            os.path.join(sample_path, "seed_" + str(seed) + "_" + f"{base_count:05}.{img_format}")
+                            os.path.join(sample_path, f"seed_{str(seed)}_str_{str(strength)}_scl-{scale}_stps-{ddim_steps}-{base_count:05}.{img_format}")
                         )
                         seeds += str(seed) + ","
                         seed += 1
